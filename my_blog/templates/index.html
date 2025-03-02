@@ -1,0 +1,71 @@
+{% extends "layout.html" %}
+
+{% block content %}
+<div class="container mt-4">
+    <h1 class="mb-4">Bài Viết Mới Nhất</h1>
+    
+    {% if posts.items %}
+        {% for post in posts.items %}
+        <div class="card mb-4 shadow-sm">
+            <div class="card-body">
+                <h2 class="card-title">{{ post.title }}</h2>
+                <p class="card-text text-muted">Đăng bởi {{ post.author.username }} vào {{ post.date_posted.strftime('%d/%m/%Y, %H:%M') }}</p>
+                <p class="card-text">{{ post.content|truncate(200) }}</p>
+                <a href="{{ url_for('post', post_id=post.id) }}" class="btn btn-primary">Đọc tiếp</a>
+            </div>
+        </div>
+        {% endfor %}
+        
+        <!-- Phân trang -->
+        <nav aria-label="Page navigation">
+            <ul class="pagination justify-content-center">
+                {% if posts.has_prev %}
+                <li class="page-item">
+                    <a class="page-link" href="{{ url_for('index', page=posts.prev_num) }}">Trang trước</a>
+                </li>
+                {% else %}
+                <li class="page-item disabled">
+                    <span class="page-link">Trang trước</span>
+                </li>
+                {% endif %}
+                
+                {% for page_num in posts.iter_pages(left_edge=1, right_edge=1, left_current=2, right_current=2) %}
+                    {% if page_num %}
+                        {% if page_num == posts.page %}
+                        <li class="page-item active">
+                            <span class="page-link">{{ page_num }}</span>
+                        </li>
+                        {% else %}
+                        <li class="page-item">
+                            <a class="page-link" href="{{ url_for('index', page=page_num) }}">{{ page_num }}</a>
+                        </li>
+                        {% endif %}
+                    {% else %}
+                        <li class="page-item disabled">
+                            <span class="page-link">...</span>
+                        </li>
+                    {% endif %}
+                {% endfor %}
+                
+                {% if posts.has_next %}
+                <li class="page-item">
+                    <a class="page-link" href="{{ url_for('index', page=posts.next_num) }}">Trang tiếp</a>
+                </li>
+                {% else %}
+                <li class="page-item disabled">
+                    <span class="page-link">Trang tiếp</span>
+                </li>
+                {% endif %}
+            </ul>
+        </nav>
+        
+    {% else %}
+        <div class="alert alert-info">
+            Chưa có bài viết nào.
+            {% if current_user.is_authenticated %}
+            <a href="{{ url_for('create_post') }}">Hãy tạo bài viết đầu tiên!</a>
+            {% endif %}
+        </div>
+    {% endif %}
+</div>
+{% endblock %}

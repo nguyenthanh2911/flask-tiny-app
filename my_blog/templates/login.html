@@ -1,0 +1,46 @@
+{% extends "layout.html" %}
+
+{% block content %}
+<div class="container mt-4">
+    <div class="row justify-content-center">
+        <div class="col-md-6">
+            <div class="card shadow">
+                <div class="card-header bg-primary text-white">
+                    <h2 class="mb-0 text-center">Đăng nhập</h2>
+                </div>
+                <div class="card-body p-4">
+                    <form method="POST" action="">
+                        <div class="mb-3">
+                            <label for="email" class="form-label">Email</label>
+                            <input type="email" class="form-control" id="email" name="email" required>
+                        </div>
+                        <div class="mb-3">
+                            <label for="password" class="form-label">Mật khẩu</label>
+                            <input type="password" class="form-control" id="password" name="password" required>
+                        </div>
+                        <div class="d-grid gap-2">
+                            <button type="submit" class="btn btn-primary btn-lg">Đăng nhập</button>
+                        </div>
+                    </form>
+                    
+                    <div class="mt-4">
+                        <p class="text-center">Chưa có tài khoản? <a href="{{ url_for('register') }}">Đăng ký</a></p>
+                    </div>
+                    
+                    <!-- Phần đăng nhập với tư cách admin -->
+                    <div class="mt-3 text-center">
+                        <hr>
+                        <p class="text-muted">hoặc</p>
+                        <a href="{{ url_for('login_as_admin') }}" class="btn btn-outline-secondary">
+                            <i class="fas fa-user-shield"></i> Đăng nhập với tư cách Admin
+                        </a>
+                        <div class="mt-2">
+                            <small class="text-muted">Email: admin@example.com / Mật khẩu: admin123</small>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

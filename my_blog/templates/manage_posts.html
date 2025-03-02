@@ -1,0 +1,79 @@
+{% extends "layout.html" %}
+
+{% block content %}
+<div class="container mt-4">
+    <div class="d-flex justify-content-between align-items-center mb-4">
+        <h1>Quản lý bài viết của bạn</h1>
+        <a href="{{ url_for('create_post') }}" class="btn btn-success">
+            <i class="fas fa-plus"></i> Tạo bài viết mới
+        </a>
+    </div>
+
+    {% if posts %}
+    <form action="{{ url_for('delete_posts') }}" method="POST">
+        <div class="card shadow">
+            <div class="card-header bg-light d-flex justify-content-between align-items-center">
+                <div>
+                    <button type="submit" class="btn btn-danger" onclick="return confirm('Bạn có chắc chắn muốn xóa các bài viết đã chọn?')">
+                        <i class="fas fa-trash"></i> Xóa bài viết đã chọn
+                    </button>
+                </div>
+                <div class="form-check">
+                    <input class="form-check-input" type="checkbox" id="selectAll">
+                    <label class="form-check-label" for="selectAll">Chọn tất cả</label>
+                </div>
+            </div>
+            <div class="card-body p-0">
+                <div class="table-responsive">
+                    <table class="table table-hover mb-0">
+                        <thead>
+                            <tr>
+                                <th width="50px">#</th>
+                                <th>Tiêu đề</th>
+                                <th>Ngày đăng</th>
+                                <th width="100px">Thao tác</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            {% for post in posts %}
+                            <tr>
+                                <td>
+                                    <div class="form-check">
+                                        <input class="form-check-input post-checkbox" type="checkbox" name="post_ids" value="{{ post.id }}" id="post{{ post.id }}">
+                                    </div>
+                                </td>
+                                <td>
+                                    <a href="{{ url_for('post', post_id=post.id) }}">{{ post.title }}</a>
+                                </td>
+                                <td>{{ post.date_posted.strftime('%d/%m/%Y, %H:%M') }}</td>
+                                <td>
+                                    <a href="{{ url_for('post', post_id=post.id) }}" class="btn btn-sm btn-primary">
+                                        <i class="fas fa-eye"></i>
+                                    </a>
+                                    <!-- Thêm nút chỉnh sửa nếu bạn có chức năng đó -->
+                                </td>
+                            </tr>
+                            {% endfor %}
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </form>
+    {% else %}
+    <div class="alert alert-info">
+        Bạn chưa có bài viết nào. <a href="{{ url_for('create_post') }}">Tạo bài viết mới</a>
+    </div>
+    {% endif %}
+</div>
+
+<script>
+    // Script để chọn/bỏ chọn tất cả
+    document.getElementById('selectAll').addEventListener('change', function() {
+        const checkboxes = document.querySelectorAll('.post-checkbox');
+        checkboxes.forEach(checkbox => {
+            checkbox.checked = this.checked;
+        });
+    });
+</script>
+{% endblock %}

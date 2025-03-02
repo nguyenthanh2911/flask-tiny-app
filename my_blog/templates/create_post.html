@@ -1,0 +1,34 @@
+{% extends "layout.html" %}
+
+{% block content %}
+<div class="container mt-4">
+    <div class="row justify-content-center">
+        <div class="col-lg-8">
+            <div class="card shadow">
+                <div class="card-header bg-primary text-white">
+                    <h2 class="mb-0 text-center">Tạo Bài Viết Mới</h2>
+                </div>
+                <div class="card-body p-4">
+                    <form method="POST" action="">
+                        <div class="mb-4">
+                            <label for="title" class="form-label fw-bold">Tiêu đề</label>
+                            <input type="text" class="form-control form-control-lg" id="title" name="title" required>
+                        </div>
+                        
+                        <div class="mb-4">
+                            <label for="content" class="form-label fw-bold">Nội dung</label>
+                            <textarea class="form-control" id="content" name="content" rows="10" required></textarea>
+                            <small class="text-muted">Viết nội dung bài viết của bạn ở đây</small>
+                        </div>
+                        
+                        <div class="d-grid gap-2 mt-4">
+                            <button type="submit" class="btn btn-success btn-lg">Đăng Bài</button>
+                            <a href="{{ url_for('index') }}" class="btn btn-outline-secondary">Hủy</a>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}
