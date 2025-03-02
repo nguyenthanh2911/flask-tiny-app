@@ -1,0 +1,60 @@
+{% extends "layout.html" %}
+
+{% block content %}
+<div class="container mt-4">
+    <h1 class="mb-4">Quản lý người dùng</h1>
+    
+    <div class="card shadow">
+        <div class="card-header bg-primary text-white">
+            <h3 class="mb-0">Danh sách người dùng</h3>
+        </div>
+        <div class="card-body">
+            <table class="table table-hover">
+                <thead>
+                    <tr>
+                        <th>ID</th>
+                        <th>Tên người dùng</th>
+                        <th>Email</th>
+                        <th>Trạng thái</th>
+                        <th>Vai trò</th>
+                        <th>Thao tác</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for user in users %}
+                    <tr>
+                        <td>{{ user.id }}</td>
+                        <td>{{ user.username }}</td>
+                        <td>{{ user.email }}</td>
+                        <td>
+                            {% if user.is_blocked %}
+                            <span class="badge bg-danger">Đã khóa</span>
+                            {% else %}
+                            <span class="badge bg-success">Hoạt động</span>
+                            {% endif %}
+                        </td>
+                        <td>
+                            {% if user.is_admin %}
+                            <span class="badge bg-primary">Admin</span>
+                            {% else %}
+                            <span class="badge bg-secondary">Người dùng</span>
+                            {% endif %}
+                        </td>
+                        <td>
+                            {% if not user.is_admin or current_user.id != user.id %}
+                                {% if user.is_blocked %}
+                                <a href="{{ url_for('unblock_user', user_id=user.id) }}" class="btn btn-sm btn-success">Mở khóa</a>
+                                {% else %}
+                                <a href="{{ url_for('block_user', user_id=user.id) }}" class="btn btn-sm btn-danger">Khóa</a>
+                                {% endif %}
+                                <a href="{{ url_for('reset_password', user_id=user.id) }}" class="btn btn-sm btn-warning">Reset mật khẩu</a>
+                            {% endif %}
+                        </td>
+                    </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
+{% endblock %}
