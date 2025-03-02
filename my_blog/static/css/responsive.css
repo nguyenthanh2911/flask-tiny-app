@@ -1,0 +1,39 @@
+/* Mobile devices */
+@media (max-width: 767px) {
+    .navbar-brand {
+      font-size: 1.5rem;
+    }
+    
+    .jumbotron {
+      padding: 2rem !important;
+    }
+    
+    .display-4 {
+      font-size: 2rem;
+    }
+  }
+  
+  /* Tablets */
+  @media (min-width: 768px) and (max-width: 991px) {
+    .card-img-top {
+      height: 160px;
+    }
+  }
+  
+  /* Ensure footer sticks to bottom */
+  html, body {
+    height: 100%;
+  }
+  
+  body {
+    display: flex;
+    flex-direction: column;
+  }
+  
+  .content {
+    flex: 1 0 auto;
+  }
+  
+  .footer {
+    flex-shrink: 0;
+  }
