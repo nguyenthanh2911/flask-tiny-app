@@ -1,6 +1,6 @@
 a. Thông tin cá nhân (Họ tên, mã sinh viên)  
-    Nguyễn Văn Thành - 22724071
-    Lê Hữu Hưng
+    Nguyễn Văn Thành - 22724071  
+    Lê Hữu Hưng  
 
 b. Mô tả project (mô tả ý tưởng mà bạn dự định làm)  
 
