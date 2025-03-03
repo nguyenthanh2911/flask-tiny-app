@@ -1,8 +1,8 @@
-a. Thông tin cá nhân (Họ tên, mã sinh viên)  
-    Nguyễn Văn Thành - 22724071
-    Lê Hữu Hưng - 22645671 
+a. Thông tin cá nhân (Họ tên, mã sinh viên)    
+    Nguyễn Văn Thành - 22724071  
+    Lê Hữu Hưng - 22645671   
 
-b. Mô tả project (mô tả ý tưởng mà bạn dự định làm)  
+b. Mô tả project (mô tả ý tưởng mà bạn dự định làm)    
     Blog app  
     1. Thêm chức năng đăng nhập đăng ký  
     2. Thêm 1 trang admin quản lý bài viết user có chức năng block và reset mật khẩu user  
