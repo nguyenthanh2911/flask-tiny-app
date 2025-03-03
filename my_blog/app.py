@@ -237,6 +237,8 @@ def delete_posts():
     flash(f'Đã xóa {deleted_count} bài viết thành công.', 'success')
     return redirect(url_for('manage_posts'))
 
+# ...existing code stays the same...
+
 if __name__ == '__main__':
     with app.app_context():
         db.create_all()
@@ -251,4 +253,5 @@ if __name__ == '__main__':
             db.session.commit()
             print('Tài khoản admin đã được tạo!')
     
-    app.run(debug=True)
+    # Change this line to bind to all network interfaces
+    app.run(host='0.0.0.0', debug=True)

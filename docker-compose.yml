@@ -1,0 +1,14 @@
+version: '3.8'
+
+services:
+  web:
+    build: .
+    ports:
+      - "5000:5000"
+    volumes:
+      # Mount for database persistence and live code changes
+      - ./my_blog:/app/my_blog
+      - ./instance:/app/instance
+    environment:
+      - FLASK_ENV=development
+    restart: unless-stopped
